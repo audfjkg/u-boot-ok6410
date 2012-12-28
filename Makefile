@@ -758,6 +758,22 @@ smdk6400_config	:	unconfig
 
 #########################################################################
 #########################################################################
+houstar_noUSB_config	\
+houstar_config	:	unconfig
+	@mkdir -p $(obj)include $(obj)board/samsung/houstar
+	@mkdir -p $(obj)nand_spl/board/samsung/houstar
+	@echo "#define CONFIG_NAND_U_BOOT" > $(obj)include/config.h
+	@echo "CONFIG_NAND_U_BOOT = y" >> $(obj)include/config.mk
+	@if [ -z "$(findstring houstar_noUSB_config,$@)" ]; then			\
+		echo "RAM_TEXT = 0x57e00000" >> $(obj)board/samsung/houstar/config.tmp;\
+	else										\
+		echo "RAM_TEXT = 0xc7e00000" >> $(obj)board/samsung/houstar/config.tmp;\
+	fi
+	@$(MKCONFIG) houstar arm arm1176 houstar samsung s3c64xx
+	@echo "CONFIG_NAND_U_BOOT = y" >> $(obj)include/config.mk
+
+#########################################################################
+#########################################################################
 
 clean:
 	@rm -f $(obj)examples/standalone/82559_eeprom			  \
