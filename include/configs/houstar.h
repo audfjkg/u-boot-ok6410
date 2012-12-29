@@ -78,12 +78,23 @@
 /*
  * Hardware drivers
  */
-#define CONFIG_CS8900			/* we have a CS8900 on-board	*/
-#define CONFIG_CS8900_BASE	  	0x18800300
-#define CONFIG_CS8900_BUS16		/* follow the Linux driver	*/
 
-/*
- * select serial console configuration
+//#define CONFIG_CS8900			/* we have a CS8900 on-board	*/
+//#define CONFIG_CS8900_BASE	  	0x18800300
+//#define CONFIG_CS8900_BUS16		/* follow the Linux driver	*/
+#define	CONFIG_DRIVER_DM9000 1
+#define CONFIG_DM9000_BASE			0x18800300
+#define DM9000_IO                   (CONFIG_DM9000_BASE)
+#define DM9000_DATA					(CONFIG_DM9000_BASE+0x4)
+#define CONFIG_DM9000_DEBUG	1
+#define CONFIG_DM9000_USE_16BIT 1
+/* netmast serverip ipaddr*/
+#define CONFIG_ETHADDR  55:43:77:58:12:40
+#define CONFIG_NETMASK  255.255.255.0
+#define CONFIG_IPADDR	192.168.1.232
+#define CONFIG_SERVERIP 192.168.1.101
+#define CONFIG_GATEWAYIP 192.168.1.1
+/* * select serial console configuration
  */
 #define CONFIG_SERIAL1          1	/* we use SERIAL 1 on SMDK6400	*/
 
