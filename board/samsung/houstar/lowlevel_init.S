@@ -53,14 +53,14 @@ lowlevel_init:
 
 	/* LED on only #8 */
 	ldr	r0, =ELFIN_GPIO_BASE
-	ldr	r1, =0x55540000
-	str	r1, [r0, #GPNCON_OFFSET]
+	ldr	r1, =0x00111111
+	str	r1, [r0, #GPMCON_OFFSET]
 
-	ldr	r1, =0x55555555
-	str	r1, [r0, #GPNPUD_OFFSET]
+	ldr	r1, =0x00000555
+	str	r1, [r0, #GPMPUD_OFFSET]
 
-	ldr	r1, =0xf000
-	str	r1, [r0, #GPNDAT_OFFSET]
+	ldr	r1, =0x002e
+	str	r1, [r0, #GPMDAT_OFFSET]
 
 	/* Disable Watchdog */
 	ldr	r0, =0x7e000000		@0x7e004000
@@ -134,7 +134,7 @@ wakeup_reset:
 	/* LED test */
 	ldr	r0, =ELFIN_GPIO_BASE
 	ldr	r1, =0x3000
-	str	r1, [r0, #GPNDAT_OFFSET]
+	str	r1, [r0, #GPMDAT_OFFSET]
 
 	/* Load return address and jump to kernel */
 	ldr	r0, =(ELFIN_CLOCK_POWER_BASE + INF_REG0_OFFSET)
