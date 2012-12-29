@@ -34,7 +34,7 @@
 #include <config.h>
 #include <version.h>
 
-#include <asm/arch/s3c6400.h>
+#include <asm/arch/s3c6410.h>
 
 #ifdef CONFIG_SERIAL1
 #define ELFIN_UART_CONSOLE_BASE (ELFIN_UART_BASE + ELFIN_UART0_OFFSET)
@@ -242,7 +242,7 @@ wait_for_async:
 	ldr	r1, [r0, #OTHERS_OFFSET]
 	orr	r1, r1, #0x20
 	str	r1, [r0, #OTHERS_OFFSET]
-#elif !defined(CONFIG_S3C6400)
+#elif !defined(CONFIG_S3C6410)
 	/* According to 661558um_S3C6400X_rev10.pdf 0x20 is reserved */
 	ldr	r1, [r0, #OTHERS_OFFSET]
 	bic	r1, r1, #0x20
