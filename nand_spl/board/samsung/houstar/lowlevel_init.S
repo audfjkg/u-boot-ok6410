@@ -1,1 +1,1 @@
-/home/houstar/Documents/u-boot/board/samsung/houstar/lowlevel_init.S
+/home/houstar/GitRepo/u-boot/board/samsung/houstar/lowlevel_init.S

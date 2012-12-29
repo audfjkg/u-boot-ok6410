@@ -1,1 +1,1 @@
-/home/houstar/Documents/u-boot/drivers/mtd/nand/nand_ecc.c
+/home/houstar/GitRepo/u-boot/drivers/mtd/nand/nand_ecc.c

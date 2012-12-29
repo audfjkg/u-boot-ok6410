@@ -296,7 +296,7 @@ LOAD nand_ecc.o
 LOAD s3c64xx.o
 LOAD houstar_nand_spl.o
 LOAD nand_base.o
-OUTPUT(/home/houstar/Documents/u-boot/nand_spl/u-boot-spl elf32-littlearm)
+OUTPUT(/home/houstar/GitRepo/u-boot/nand_spl/u-boot-spl elf32-littlearm)
 
 .ARM.attributes
                 0x0000000000000000       0x2a
@@ -338,25 +338,25 @@ OUTPUT(/home/houstar/Documents/u-boot/nand_spl/u-boot-spl elf32-littlearm)
  .note.GNU-stack
                 0x0000000000000000        0x0 nand_base.o
 
-.debug_line     0x0000000000000000     0x19e5
+.debug_line     0x0000000000000000     0x19bf
  .debug_line    0x0000000000000000       0x88 start.o
  .debug_line    0x0000000000000088       0x7c cpu_init.o
- .debug_line    0x0000000000000104      0x203 nand_boot.o
- .debug_line    0x0000000000000307       0xac lowlevel_init.o
- .debug_line    0x00000000000003b3      0x178 nand_ecc.o
- .debug_line    0x000000000000052b      0x258 s3c64xx.o
- .debug_line    0x0000000000000783      0x10c houstar_nand_spl.o
- .debug_line    0x000000000000088f     0x1156 nand_base.o
+ .debug_line    0x0000000000000104      0x1fb nand_boot.o
+ .debug_line    0x00000000000002ff       0xac lowlevel_init.o
+ .debug_line    0x00000000000003ab      0x170 nand_ecc.o
+ .debug_line    0x000000000000051b      0x250 s3c64xx.o
+ .debug_line    0x000000000000076b      0x106 houstar_nand_spl.o
+ .debug_line    0x0000000000000871     0x114e nand_base.o
 
-.debug_info     0x0000000000000000     0x9b6a
- .debug_info    0x0000000000000000       0x6e start.o
- .debug_info    0x000000000000006e       0x71 cpu_init.o
- .debug_info    0x00000000000000df     0x18d1 nand_boot.o
- .debug_info    0x00000000000019b0       0x76 lowlevel_init.o
- .debug_info    0x0000000000001a26      0xb3e nand_ecc.o
- .debug_info    0x0000000000002564     0x171f s3c64xx.o
- .debug_info    0x0000000000003c83      0x49d houstar_nand_spl.o
- .debug_info    0x0000000000004120     0x5a4a nand_base.o
+.debug_info     0x0000000000000000     0x9b64
+ .debug_info    0x0000000000000000       0x6c start.o
+ .debug_info    0x000000000000006c       0x6f cpu_init.o
+ .debug_info    0x00000000000000db     0x18d1 nand_boot.o
+ .debug_info    0x00000000000019ac       0x74 lowlevel_init.o
+ .debug_info    0x0000000000001a20      0xb3e nand_ecc.o
+ .debug_info    0x000000000000255e     0x171f s3c64xx.o
+ .debug_info    0x0000000000003c7d      0x49d houstar_nand_spl.o
+ .debug_info    0x000000000000411a     0x5a4a nand_base.o
 
 .debug_abbrev   0x0000000000000000      0xfc4
  .debug_abbrev  0x0000000000000000       0x14 start.o
@@ -400,17 +400,17 @@ OUTPUT(/home/houstar/Documents/u-boot/nand_spl/u-boot-spl elf32-littlearm)
  .debug_ranges  0x00000000000000f8       0x10 houstar_nand_spl.o
  .debug_ranges  0x0000000000000108      0x510 nand_base.o
 
-.debug_str      0x0000000000000000     0x11c3
- .debug_str     0x0000000000000000      0x7a3 nand_boot.o
-                                        0x981 (size before relaxing)
- .debug_str     0x00000000000007a3       0x37 nand_ecc.o
-                                        0x5b6 (size before relaxing)
- .debug_str     0x00000000000007da      0x101 s3c64xx.o
-                                        0x9d2 (size before relaxing)
- .debug_str     0x00000000000008db       0xf8 houstar_nand_spl.o
-                                        0x311 (size before relaxing)
- .debug_str     0x00000000000009d3      0x7f0 nand_base.o
-                                       0x1136 (size before relaxing)
+.debug_str      0x0000000000000000     0x11c1
+ .debug_str     0x0000000000000000      0x7a1 nand_boot.o
+                                        0x97f (size before relaxing)
+ .debug_str     0x00000000000007a1       0x37 nand_ecc.o
+                                        0x5b4 (size before relaxing)
+ .debug_str     0x00000000000007d8      0x101 s3c64xx.o
+                                        0x9d0 (size before relaxing)
+ .debug_str     0x00000000000008d9       0xf8 houstar_nand_spl.o
+                                        0x30f (size before relaxing)
+ .debug_str     0x00000000000009d1      0x7f0 nand_base.o
+                                       0x1134 (size before relaxing)
 
 .debug_frame    0x0000000000000000      0x87c
  .debug_frame   0x0000000000000000       0x78 nand_boot.o
