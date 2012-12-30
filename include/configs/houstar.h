@@ -34,7 +34,7 @@
 /*
  * led
  */
-#define CONFIG_LCD
+//#define CONFIG_LCD
 #ifdef  CONFIG_LCD
 #define CONFIG_LCD_LOGO
 #endif
