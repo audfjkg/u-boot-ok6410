@@ -293,6 +293,8 @@
 /* Settings as above boot configuration */
 #define CONFIG_ENV_IS_IN_NAND
 #define CONFIG_BOOTARGS		"console=ttySAC,115200"
+/*USB DOWNLOAD */
+#define CONFIG_USB_DOWNLOAD
 
 #if !defined(CONFIG_ENABLE_MMU)
 #define CONFIG_CMD_USB			1

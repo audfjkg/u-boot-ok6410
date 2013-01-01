@@ -877,6 +877,105 @@
 /* 2b01 : mDDR */
 #define DMC_DDR_USER_CONFIG	1
 
+/*
+ * USB2.0 HS OTG (Chapter 26)
+ */
+#define USBOTG_LINK_BASE	(0x7C000000)
+#define USBOTG_PHY_BASE		(0x7C100000)
+
+/* Core Global Registers */
+#define S3C_OTG_GOTGCTL		(USBOTG_LINK_BASE + 0x000)	/* OTG Control & Status */
+#define S3C_OTG_GOTGINT		(USBOTG_LINK_BASE + 0x004)	/* OTG Interrupt */
+#define S3C_OTG_GAHBCFG		(USBOTG_LINK_BASE + 0x008)	/* Core AHB Configuration */
+#define S3C_OTG_GUSBCFG		(USBOTG_LINK_BASE + 0x00C)	/* Core USB Configuration */
+#define S3C_OTG_GRSTCTL		(USBOTG_LINK_BASE + 0x010)	/* Core Reset */
+#define S3C_OTG_GINTSTS		(USBOTG_LINK_BASE + 0x014)	/* Core Interrupt */
+#define S3C_OTG_GINTMSK		(USBOTG_LINK_BASE + 0x018)	/* Core Interrupt Mask */
+#define S3C_OTG_GRXSTSR		(USBOTG_LINK_BASE + 0x01C)	/* Receive Status Debug Read/Status Read */
+#define S3C_OTG_GRXSTSP		(USBOTG_LINK_BASE + 0x020)	/* Receive Status Debug Pop/Status Pop */
+#define S3C_OTG_GRXFSIZ		(USBOTG_LINK_BASE + 0x024)	/* Receive FIFO Size */
+#define S3C_OTG_GNPTXFSIZ	(USBOTG_LINK_BASE + 0x028)	/* Non-Periodic Transmit FIFO Size */
+#define S3C_OTG_GNPTXSTS	(USBOTG_LINK_BASE + 0x02C)	/* Non-Periodic Transmit FIFO/Queue Status */
+
+#define S3C_OTG_HPTXFSIZ	(USBOTG_LINK_BASE + 0x100)	/* Host Periodic Transmit FIFO Size */
+#define S3C_OTG_DPTXFSIZ1	(USBOTG_LINK_BASE + 0x104)	/* Device Periodic Transmit FIFO-1 Size */
+#define S3C_OTG_DPTXFSIZ2	(USBOTG_LINK_BASE + 0x108)	/* Device Periodic Transmit FIFO-2 Size */
+#define S3C_OTG_DPTXFSIZ3	(USBOTG_LINK_BASE + 0x10C)	/* Device Periodic Transmit FIFO-3 Size */
+#define S3C_OTG_DPTXFSIZ4	(USBOTG_LINK_BASE + 0x110)	/* Device Periodic Transmit FIFO-4 Size */
+#define S3C_OTG_DPTXFSIZ5	(USBOTG_LINK_BASE + 0x114)	/* Device Periodic Transmit FIFO-5 Size */
+#define S3C_OTG_DPTXFSIZ6	(USBOTG_LINK_BASE + 0x118)	/* Device Periodic Transmit FIFO-6 Size */
+#define S3C_OTG_DPTXFSIZ7	(USBOTG_LINK_BASE + 0x11C)	/* Device Periodic Transmit FIFO-7 Size */
+#define S3C_OTG_DPTXFSIZ8	(USBOTG_LINK_BASE + 0x120)	/* Device Periodic Transmit FIFO-8 Size */
+#define S3C_OTG_DPTXFSIZ9	(USBOTG_LINK_BASE + 0x124)	/* Device Periodic Transmit FIFO-9 Size */
+#define S3C_OTG_DPTXFSIZ10	(USBOTG_LINK_BASE + 0x128)	/* Device Periodic Transmit FIFO-10 Size */
+#define S3C_OTG_DPTXFSIZ11	(USBOTG_LINK_BASE + 0x12C)	/* Device Periodic Transmit FIFO-11 Size */
+#define S3C_OTG_DPTXFSIZ12	(USBOTG_LINK_BASE + 0x130)	/* Device Periodic Transmit FIFO-12 Size */
+#define S3C_OTG_DPTXFSIZ13	(USBOTG_LINK_BASE + 0x134)	/* Device Periodic Transmit FIFO-13 Size */
+#define S3C_OTG_DPTXFSIZ14	(USBOTG_LINK_BASE + 0x138)	/* Device Periodic Transmit FIFO-14 Size */
+#define S3C_OTG_DPTXFSIZ15	(USBOTG_LINK_BASE + 0x13C)	/* Device Periodic Transmit FIFO-15 Size */
+	
+/* Host Global Registers */
+#define S3C_OTG_HCFG		(USBOTG_LINK_BASE + 0x400)	/* Host Configuration */
+#define S3C_OTG_HFIR		(USBOTG_LINK_BASE + 0x404)	/* Host Frame Interval */
+#define S3C_OTG_HFNUM		(USBOTG_LINK_BASE + 0x408)	/* Host Frame Number/Frame Time Remaining */
+#define S3C_OTG_HPTXSTS		(USBOTG_LINK_BASE + 0x410)	/* Host Periodic Transmit FIFO/Queue Status */
+#define S3C_OTG_HAINT		(USBOTG_LINK_BASE + 0x414)	/* Host All Channels Interrupt */
+#define S3C_OTG_HAINTMSK	(USBOTG_LINK_BASE + 0x418)	/* Host All Channels Interrupt Mask */
+
+/* Host Port Control & Status Registers */
+#define S3C_OTG_HPRT		(USBOTG_LINK_BASE + 0x440)	/* Host Port Control & Status */
+
+/* Host Channel-Specific Registers */
+#define S3C_OTG_HCCHAR0		(USBOTG_LINK_BASE + 0x500)	/* Host Channel-0 Characteristics */
+#define S3C_OTG_HCSPLT0		(USBOTG_LINK_BASE + 0x504)	/* Host Channel-0 Split Control */
+#define S3C_OTG_HCINT0		(USBOTG_LINK_BASE + 0x508)	/* Host Channel-0 Interrupt */
+#define S3C_OTG_HCINTMSK0	(USBOTG_LINK_BASE + 0x50C)	/* Host Channel-0 Interrupt Mask */
+#define S3C_OTG_HCTSIZ0		(USBOTG_LINK_BASE + 0x510)	/* Host Channel-0 Transfer Size */
+#define S3C_OTG_HCDMA0		(USBOTG_LINK_BASE + 0x514)	/* Host Channel-0 DMA Address */
+
+	
+/* Device Global Registers */
+#define S3C_OTG_DCFG		(USBOTG_LINK_BASE + 0x800)	/* Device Configuration */
+#define S3C_OTG_DCTL		(USBOTG_LINK_BASE + 0x804)	/* Device Control */
+#define S3C_OTG_DSTS		(USBOTG_LINK_BASE + 0x808)	/* Device Status */
+#define S3C_OTG_DIEPMSK 	(USBOTG_LINK_BASE + 0x810)	/* Device IN Endpoint Common Interrupt Mask */
+#define S3C_OTG_DOEPMSK 	(USBOTG_LINK_BASE + 0x814)	/* Device OUT Endpoint Common Interrupt Mask */
+#define S3C_OTG_DAINT		(USBOTG_LINK_BASE + 0x818)	/* Device All Endpoints Interrupt */
+#define S3C_OTG_DAINTMSK	(USBOTG_LINK_BASE + 0x81C)	/* Device All Endpoints Interrupt Mask */
+#define S3C_OTG_DTKNQR1 	(USBOTG_LINK_BASE + 0x820)	/* Device IN Token Sequence Learning Queue Read 1 */
+#define S3C_OTG_DTKNQR2 	(USBOTG_LINK_BASE + 0x824)	/* Device IN Token Sequence Learning Queue Read 2 */
+#define S3C_OTG_DVBUSDIS	(USBOTG_LINK_BASE + 0x828)	/* Device VBUS Discharge Time */
+#define S3C_OTG_DVBUSPULSE	(USBOTG_LINK_BASE + 0x82C)	/* Device VBUS Pulsing Time */
+#define S3C_OTG_DTKNQR3 	(USBOTG_LINK_BASE + 0x830)	/* Device IN Token Sequence Learning Queue Read 3 */
+#define S3C_OTG_DTKNQR4 	(USBOTG_LINK_BASE + 0x834)	/* Device IN Token Sequence Learning Queue Read 4 */
+	
+/* Device Logical IN Endpoint-Specific Registers */
+#define S3C_OTG_DIEPCTL0	(USBOTG_LINK_BASE + 0x900)	/* Device IN Endpoint 0 Control */
+#define S3C_OTG_DIEPINT0	(USBOTG_LINK_BASE + 0x908)	/* Device IN Endpoint 0 Interrupt */
+#define S3C_OTG_DIEPTSIZ0	(USBOTG_LINK_BASE + 0x910)	/* Device IN Endpoint 0 Transfer Size */
+#define S3C_OTG_DIEPDMA0	(USBOTG_LINK_BASE + 0x914)	/* Device IN Endpoint 0 DMA Address */
+
+/* Device Logical OUT Endpoint-Specific Registers */
+#define S3C_OTG_DOEPCTL0	(USBOTG_LINK_BASE + 0xB00)	/* Device OUT Endpoint 0 Control */
+#define S3C_OTG_DOEPINT0	(USBOTG_LINK_BASE + 0xB08)	/* Device OUT Endpoint 0 Interrupt */
+#define S3C_OTG_DOEPTSIZ0	(USBOTG_LINK_BASE + 0xB10)	/* Device OUT Endpoint 0 Transfer Size */
+#define S3C_OTG_DOEPDMA0	(USBOTG_LINK_BASE + 0xB14)	/* Device OUT Endpoint 0 DMA Address */
+	
+/* Power & clock gating registers */
+#define S3C_OTG_PCGCCTRL	(USBOTG_LINK_BASE + 0xE00)
+
+/* Endpoint FIFO address */
+#define S3C_OTG_EP0_FIFO	(USBOTG_LINK_BASE + 0x1000)
+
+ 
+
+/* OTG PHY CORE REGISTERS */
+#define S3C_OTG_PHYPWR		(USBOTG_PHY_BASE+0x00)
+#define S3C_OTG_PHYCTRL		(USBOTG_PHY_BASE+0x04)
+#define S3C_OTG_RSTCON		(USBOTG_PHY_BASE+0x08)
+
+
+
 #ifndef __ASSEMBLY__
 enum s3c64xx_uarts_nr {
 	S3C64XX_UART0,
