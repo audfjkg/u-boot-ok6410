@@ -100,9 +100,9 @@ int checkboard(void)
 #endif
 
 #ifdef CONFIG_ENABLE_MMU
-ulong virt_to_phy_smdk6400(ulong addr)
+ulong virt_to_phy_houstar(ulong addr)
 {
-	if ((0xc0000000 <= addr) && (addr < 0xc8000000))
+	if ((0xc0000000 <= addr) && (addr < 0xD0000000/*0xc8000000*/))
 		return addr - 0xc0000000 + 0x50000000;
 	else
 		printf("do not support this address : %08lx\n", addr);

@@ -36,6 +36,19 @@
 
 #include <asm/hardware.h>
 
+/* S3C6400 device base addresses */
+#define ELFIN_DMA_BASE		0x75000000
+#define ELFIN_LCD_BASE		0x77100000
+#define ELFIN_USB_HOST_BASE	0x74300000
+#define ELFIN_I2C_BASE		0x7f004000
+#define ELFIN_I2S_BASE		0x7f002000
+#define ELFIN_ADC_BASE		0x7e00b000
+#define ELFIN_SPI_BASE		0x7f00b000
+#define ELFIN_HSMMC_0_BASE	0x7c200000
+#define ELFIN_HSMMC_1_BASE	0x7c300000
+#define ELFIN_HSMMC_2_BASE	0x7c400000
+
+
 #define ELFIN_CLOCK_POWER_BASE	0x7e00f000
 
 /* Clock & Power Controller for mDirac3*/
@@ -256,6 +269,7 @@
 #define GPJPUD_OFFSET		0x128
 #define GPJCONSLP_OFFSET	0x12C
 #define GPJPUDSLP_OFFSET	0x130
+#define SPCON_OFFSET		0x1A0
 #define MEM0DRVCON_OFFSET	0x1D0
 #define MEM1DRVCON_OFFSET	0x1D4
 #define GPKCON0_OFFSET		0x800

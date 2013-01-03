@@ -32,12 +32,12 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 /*
- * led
+ * lcd
  */
-//#define CONFIG_LCD
-#ifdef  CONFIG_LCD
-#define CONFIG_LCD_LOGO
-#endif
+#define CONFIG_LCD
+//#ifdef  CONFIG_LCD
+//#define CONFIG_LCD_LOGO
+//#endif
 
 /*
  * High Level Configuration Options
@@ -64,6 +64,7 @@
 #if !defined(CONFIG_NAND_SPL) && (CONFIG_SYS_TEXT_BASE >= 0xc0000000)
 #define CONFIG_ENABLE_MMU
 #endif
+
 
 #define CONFIG_SETUP_MEMORY_TAGS
 #define CONFIG_CMDLINE_TAG

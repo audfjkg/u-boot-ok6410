@@ -29,6 +29,9 @@
 #ifndef _LCD_H_
 #define _LCD_H_
 
+#include <s3cfb_LCD.h>
+#define LCD_BPP LCD_COLOR16
+
 extern char lcd_is_enabled;
 
 extern int lcd_line_length;
@@ -86,6 +89,16 @@ typedef struct vidinfo {
 	u_char	vl_vpw;		/* Vertical sync pulse width */
 	u_char	vl_lcdac;	/* LCD AC timing */
 	u_char	vl_wbf;		/* Wait between frames */
+} vidinfo_t;
+
+#elif defined CONFIG_S3C6410
+typedef struct vidinfo {
+	ushort vl_col;
+	ushort vl_row;
+	ushort vl_width;
+	ushort vl_height;
+	u_char vl_bpix;
+	ushort *cmap;
 } vidinfo_t;
 
 #elif defined(CONFIG_CPU_PXA25X) || defined(CONFIG_CPU_PXA27X) || \
