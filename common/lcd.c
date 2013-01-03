@@ -105,6 +105,10 @@ short console_col;
 short console_row;
 struct vidinfo panel_info;
 
+extern ulong get_HCLK(void);
+static void lcd_hline(int x,int y,int width,uint16_t color);
+static void lcd_vline(int x,int y,int height,uint16_t color);
+
 void lcd_ctrl_init(void *lcdbase);
 void lcd_enable(void);
 void lcd_disable(void);
@@ -211,11 +215,12 @@ void lcd_putc(const char c)
 
 void lcd_puts(const char *s)
 {
-	if (!lcd_is_enabled) {
+	/*if (!lcd_is_enabled) {
 		serial_puts(s);
 
 		return;
-	}
+	}*/
+	serial_puts(s);
 
 	while (*s) {
 		lcd_putc(*s++);
@@ -239,6 +244,33 @@ void lcd_printf(const char *fmt, ...)
 /************************************************************************/
 /* ** Low-Level Graphics Routines					*/
 /************************************************************************/
+/************************************************************************/
+/* ** Low-Level Graphics Routines					*/
+/************************************************************************/
+static void lcd_hline(int x,int y,int width,uint16_t color)
+{
+	uint16_t *pp;
+	int i;
+
+	pp = (uint16_t *)((uint32_t)lcd_base + y * lcd_line_length + x * panel_info.vl_bpix / 8 );  
+	for(i=0;i<width;i++)
+	{
+		*pp = color;
+		pp++;
+	} 
+}
+
+static void lcd_vline(int x,int y,int height,uint16_t color)
+{
+	uint16_t *pp;
+	int i;
+
+	for(i=0;i<height;i++)
+	{
+		pp = (uint16_t *)((uint32_t)lcd_base + (y + i) * lcd_line_length + x * NBITS(panel_info.vl_bpix)/ 8 );  
+		*pp = color;
+	} 
+}
 
 static void lcd_drawchars(ushort x, ushort y, uchar *str, int count)
 {
@@ -952,8 +984,8 @@ void lcd_ctrl_init(void *lcdbase)
 	ulong freq_Hclk;
 	ulong fb_size;
 	unsigned char nn;
-	//unsigned short *pp;
-	//int i;
+	unsigned short *pp;
+	int i;
 
 	printf("********************************************************\n");
 	printf("initial lcd controller\n");
@@ -1112,17 +1144,17 @@ lcd_setcolreg(ushort regno,
 	cmap_ptr =(unsigned short *)&cp->lcd_cmap[regno *2];
 
 	colreg = ((red & 0x0F) << 8) |
-		((green &0x0F) <<4) |
-		(blue & 0x0F);
+	((green &0x0F) <<4) |
+	(blue & 0x0F);
 #ifdef CFG_INVERT_COLORS
-	colreg ^=0x0FFF；
+colreg ^=0x0FFF；
 #endif
-		*cmap_ptr = colreg;
-	debug("setcolreg: reg:%2d @ %p:R=%02x G=%02x B=%02x =>%02x%02x\n",
-			regno,&(cp->lcd_cmap[regno*2]),
-			red,green,blue,
-			cp->lcd_cmap[regno*2],cp-lcd_cmap[regno*2]+1);
-*/}
+  *cmap_ptr = colreg;
+  debug("setcolreg: reg:%2d @ %p:R=%02x G=%02x B=%02x =>%02x%02x\n",
+  regno,&(cp->lcd_cmap[regno*2]),
+  red,green,blue,
+  cp->lcd_cmap[regno*2],cp-lcd_cmap[regno*2]+1);
+  */}
 
 /************************************************************************/
 /************************************************************************/
