@@ -30,7 +30,7 @@
 #include <nand.h>
 #include <linux/mtd/nand.h>
 
-#include <asm/arch/s3c6400.h>
+#include <asm/arch/s3c6410.h>
 
 #include <asm/io.h>
 #include <asm/errno.h>
@@ -234,76 +234,6 @@ static int s3c_nand_correct_data(struct mtd_info *mtd, u_char *dat,
 }
 #endif /* CONFIG_SYS_S3C_NAND_HWECC */
 
-/*
- * Board-specific NAND initialization. The following members of the
- * argument are board-specific (per include/linux/mtd/nand.h):
- * - IO_ADDR_R?: address to read the 8 I/O lines of the flash device
- * - IO_ADDR_W?: address to write the 8 I/O lines of the flash device
- * - hwcontrol: hardwarespecific function for accesing control-lines
- * - dev_ready: hardwarespecific function for  accesing device ready/busy line
- * - enable_hwecc?: function to enable (reset)  hardware ecc generator. Must
- *   only be provided if a hardware ECC is available
- * - eccmode: mode of ecc, see defines
- * - chip_delay: chip dependent delay for transfering data from array to
- *   read regs (tR)
- * - options: various chip options. They can partly be set to inform
- *   nand_scan about special functionality. See the defines for further
- *   explanation
- * Members with a "?" were not set in the merged testing-NAND branch,
- * so they are not set here either.
- */
-int board_nand_init(struct nand_chip *nand)
-{
-	static int chip_n;
-
-	if (chip_n >= MAX_CHIPS)
-		return -ENODEV;
-
-	NFCONT_REG = (NFCONT_REG & ~NFCONT_WP) | NFCONT_ENABLE | 0x6;
-
-	nand->IO_ADDR_R		= (void __iomem *)NFDATA;
-	nand->IO_ADDR_W		= (void __iomem *)NFDATA;
-	nand->cmd_ctrl		= s3c_nand_hwcontrol;
-	nand->dev_ready		= s3c_nand_device_ready;
-	nand->select_chip	= s3c_nand_select_chip;
-	nand->options		= 0;
-#ifdef CONFIG_NAND_SPL
-	nand->read_byte		= nand_read_byte;
-	nand->write_buf		= nand_write_buf;
-	nand->read_buf		= nand_read_buf;
-#endif
-
-#ifdef CONFIG_SYS_S3C_NAND_HWECC
-#ifdef CONFIG_NAND_BL1_8BIT_ECC
-	printf("USE HWECC 8BIT\n");//zxd
-	nand->ecc.hwctl	 = s3c_nand_enable_hwecc_8bit;
-	nand->ecc.calculate	= s3c_nand_calculate_ecc_8bit;
-	nand->ecc.correct	= s3c_nand_correct_data_8bit;
-	nand->ecc.read_page = s3c_nand_read_page_8bit;
-	nand->ecc.write_page = s3c_nand_write_page_8bit;
-#else
-	printf("USE HWECC Default\n");//zxd
-	nand->ecc.hwctl	 = s3c_nand_enable_hwecc;
-	nand->ecc.calculate	= s3c_nand_calculate_ecc;
-	nand->ecc.correct	= s3c_nand_correct_data;
-#endif
-	/*
-	 * If you get more than 1 NAND-chip with different page-sizes on the
-	 * board one day, it will get more complicated...
-	 */
-	nand->ecc.mode	 = NAND_ECC_HW;
-	nand->ecc.size	 = CONFIG_SYS_NAND_ECCSIZE;
-	nand->ecc.bytes	 = CONFIG_SYS_NAND_ECCBYTES;
-	printf("ECC Size:%d ECC Bytes:%d\n",nand->ecc.size,nand->ecc.bytes);//zxd	
-#else
-	nand->ecc.mode	 = NAND_ECC_SOFT;
-#endif /* ! CONFIG_SYS_S3C_NAND_HWECC */
-
-	nand->priv		= nand_cs + chip_n++;
-
-	return 0;
-}
-
 #if defined(CONFIG_NAND_BL1_8BIT_ECC) && (defined(CONFIG_S3C6410) || defined(CONFIG_S3C6430))
 /***************************************************************
  * jsgood: Temporary 8 Bit H/W ECC supports for BL1 (6410/6430 only)
@@ -331,7 +261,7 @@ static void s3c_nand_wait_ecc_busy_8bit(void)
 {
 	while (readl(NF8ECCERR0) & NFESTAT0_ECCBUSY) {}
 }
-void s3c_nand_enable_hwecc_8bit(struct mtd_info *mtd, int mode)
+static void s3c_nand_enable_hwecc_8bit(struct mtd_info *mtd, int mode)
 {
 	u_long nfcont, nfconf;
 
@@ -514,3 +444,74 @@ int s3c_nand_read_page_8bit(struct mtd_info *mtd, struct nand_chip *chip,
 
 /********************************************************/
 #endif
+
+
+/*
+ * Board-specific NAND initialization. The following members of the
+ * argument are board-specific (per include/linux/mtd/nand.h):
+ * - IO_ADDR_R?: address to read the 8 I/O lines of the flash device
+ * - IO_ADDR_W?: address to write the 8 I/O lines of the flash device
+ * - hwcontrol: hardwarespecific function for accesing control-lines
+ * - dev_ready: hardwarespecific function for  accesing device ready/busy line
+ * - enable_hwecc?: function to enable (reset)  hardware ecc generator. Must
+ *   only be provided if a hardware ECC is available
+ * - eccmode: mode of ecc, see defines
+ * - chip_delay: chip dependent delay for transfering data from array to
+ *   read regs (tR)
+ * - options: various chip options. They can partly be set to inform
+ *   nand_scan about special functionality. See the defines for further
+ *   explanation
+ * Members with a "?" were not set in the merged testing-NAND branch,
+ * so they are not set here either.
+ */
+int board_nand_init(struct nand_chip *nand)
+{
+	static int chip_n;
+
+	if (chip_n >= MAX_CHIPS)
+		return -ENODEV;
+
+	NFCONT_REG = (NFCONT_REG & ~NFCONT_WP) | NFCONT_ENABLE | 0x6;
+
+	nand->IO_ADDR_R		= (void __iomem *)NFDATA;
+	nand->IO_ADDR_W		= (void __iomem *)NFDATA;
+	nand->cmd_ctrl		= s3c_nand_hwcontrol;
+	nand->dev_ready		= s3c_nand_device_ready;
+	nand->select_chip	= s3c_nand_select_chip;
+	nand->options		= 0;
+#ifdef CONFIG_NAND_SPL
+	nand->read_byte		= nand_read_byte;
+	nand->write_buf		= nand_write_buf;
+	nand->read_buf		= nand_read_buf;
+#endif
+
+#ifdef CONFIG_SYS_S3C_NAND_HWECC
+#ifdef CONFIG_NAND_BL1_8BIT_ECC
+	printf("USE HWECC 8BIT\n");//zxd
+	nand->ecc.hwctl	 = s3c_nand_enable_hwecc_8bit;
+	nand->ecc.calculate	= s3c_nand_calculate_ecc_8bit;
+	nand->ecc.correct	= s3c_nand_correct_data_8bit;
+	nand->ecc.read_page = s3c_nand_read_page_8bit;
+	nand->ecc.write_page = s3c_nand_write_page_8bit;
+#else
+	printf("USE HWECC Default\n");//zxd
+	nand->ecc.hwctl	 = s3c_nand_enable_hwecc;
+	nand->ecc.calculate	= s3c_nand_calculate_ecc;
+	nand->ecc.correct	= s3c_nand_correct_data;
+#endif
+	/*
+	 * If you get more than 1 NAND-chip with different page-sizes on the
+	 * board one day, it will get more complicated...
+	 */
+	nand->ecc.mode	 = NAND_ECC_HW;
+	nand->ecc.size	 = CONFIG_SYS_NAND_ECCSIZE;
+	nand->ecc.bytes	 = CONFIG_SYS_NAND_ECCBYTES;
+	printf("ECC Size:%d ECC Bytes:%d\n",nand->ecc.size,nand->ecc.bytes);//zxd	
+#else
+	nand->ecc.mode	 = NAND_ECC_SOFT;
+#endif /* ! CONFIG_SYS_S3C_NAND_HWECC */
+
+	nand->priv		= nand_cs + chip_n++;
+
+	return 0;
+}

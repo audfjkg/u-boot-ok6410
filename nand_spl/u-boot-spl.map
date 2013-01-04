@@ -201,92 +201,107 @@ Linker script and memory map
  .text.s3c_nand_device_ready
                 0x0000000000000798       0x14 s3c64xx.o
 
-.text.s3c_nand_enable_hwecc
-                0x00000000000007ac       0x40
- .text.s3c_nand_enable_hwecc
-                0x00000000000007ac       0x40 s3c64xx.o
+.text.s3c_nand_enable_hwecc_8bit
+                0x00000000000007ac       0x50
+ .text.s3c_nand_enable_hwecc_8bit
+                0x00000000000007ac       0x50 s3c64xx.o
 
-.text.s3c_nand_calculate_ecc
-                0x00000000000007ec       0x3c
- .text.s3c_nand_calculate_ecc
-                0x00000000000007ec       0x3c s3c64xx.o
+.text.s3c_nand_correct_data_8bit
+                0x00000000000007fc      0x108
+ .text.s3c_nand_correct_data_8bit
+                0x00000000000007fc      0x108 s3c64xx.o
+                0x00000000000007fc                s3c_nand_correct_data_8bit
 
-.text.s3c_nand_correct_data
-                0x0000000000000828       0x5c
- .text.s3c_nand_correct_data
-                0x0000000000000828       0x5c s3c64xx.o
+.text.s3c_nand_calculate_ecc_8bit
+                0x0000000000000904       0xbc
+ .text.s3c_nand_calculate_ecc_8bit
+                0x0000000000000904       0xbc s3c64xx.o
+                0x0000000000000904                s3c_nand_calculate_ecc_8bit
+
+.text.s3c_nand_write_page_8bit
+                0x00000000000009c0       0xb8
+ .text.s3c_nand_write_page_8bit
+                0x00000000000009c0       0xb8 s3c64xx.o
+                0x00000000000009c0                s3c_nand_write_page_8bit
+
+.text.s3c_nand_read_page_8bit
+                0x0000000000000a78      0x100
+ .text.s3c_nand_read_page_8bit
+                0x0000000000000a78      0x100 s3c64xx.o
+                0x0000000000000a78                s3c_nand_read_page_8bit
 
 .text.s3c_nand_hwcontrol
-                0x0000000000000884       0x80
+                0x0000000000000b78       0x80
  .text.s3c_nand_hwcontrol
-                0x0000000000000884       0x80 s3c64xx.o
+                0x0000000000000b78       0x80 s3c64xx.o
 
 .text.board_nand_init
-                0x0000000000000904       0xf0
+                0x0000000000000bf8      0x108
  .text.board_nand_init
-                0x0000000000000904       0xf0 s3c64xx.o
-                0x0000000000000904                board_nand_init
+                0x0000000000000bf8      0x108 s3c64xx.o
+                0x0000000000000bf8                board_nand_init
 
 .text.board_init_f
-                0x00000000000009f4       0x18
+                0x0000000000000d00       0x18
  .text.board_init_f
-                0x00000000000009f4       0x18 houstar_nand_spl.o
-                0x00000000000009f4                board_init_f
+                0x0000000000000d00       0x18 houstar_nand_spl.o
+                0x0000000000000d00                board_init_f
 
 .text.nand_read_byte
-                0x0000000000000a0c       0x14
+                0x0000000000000d18       0x14
  .text.nand_read_byte
-                0x0000000000000a0c       0x14 nand_base.o
-                0x0000000000000a0c                nand_read_byte
+                0x0000000000000d18       0x14 nand_base.o
+                0x0000000000000d18                nand_read_byte
 
 .text.nand_write_buf
-                0x0000000000000a20       0x2c
+                0x0000000000000d2c       0x2c
  .text.nand_write_buf
-                0x0000000000000a20       0x2c nand_base.o
-                0x0000000000000a20                nand_write_buf
+                0x0000000000000d2c       0x2c nand_base.o
+                0x0000000000000d2c                nand_write_buf
 
 .text.nand_read_buf
-                0x0000000000000a4c       0x2c
+                0x0000000000000d58       0x2c
  .text.nand_read_buf
-                0x0000000000000a4c       0x2c nand_base.o
-                0x0000000000000a4c                nand_read_buf
-                0x0000000000000a78                . = ALIGN (0x4)
+                0x0000000000000d58       0x2c nand_base.o
+                0x0000000000000d58                nand_read_buf
+                0x0000000000000d84                . = ALIGN (0x4)
 
-.rodata         0x0000000000000a78       0x60
+.rodata         0x0000000000000d84       0x60
  *(SORT(.rodata*))
- .rodata        0x0000000000000a78       0x60 nand_boot.o
-                0x0000000000000ad8                . = ALIGN (0x4)
+ .rodata        0x0000000000000d84       0x60 nand_boot.o
+                0x0000000000000de4                . = ALIGN (0x4)
 
-.data           0x0000000000000ad8        0x8
+.data           0x0000000000000de4        0x8
  *(.data)
- .data          0x0000000000000ad8        0x8 s3c64xx.o
-                0x0000000000000ae0                . = ALIGN (0x4)
+ .data          0x0000000000000de4        0x8 s3c64xx.o
+                0x0000000000000dec                . = ALIGN (0x4)
 
 .got
  *(.got)
-                0x0000000000000ae0                __u_boot_cmd_start = .
+                0x0000000000000dec                __u_boot_cmd_start = .
 
 .u_boot_cmd
  *(.u_boot_cmd)
-                0x0000000000000ae0                __u_boot_cmd_end = .
-                0x0000000000000ae0                . = ALIGN (0x4)
+                0x0000000000000dec                __u_boot_cmd_end = .
+                0x0000000000000dec                . = ALIGN (0x4)
 
-.rel.dyn        0x0000000000000ae0        0x0
-                0x0000000000000ae0                __rel_dyn_start = .
+.rel.dyn        0x0000000000000dec        0x0
+                0x0000000000000dec                __rel_dyn_start = .
  *(.rel*)
-                0x0000000000000ae0                __rel_dyn_end = .
+                0x0000000000000dec                __rel_dyn_end = .
 
-.dynsym         0x0000000000000ae0        0x0
-                0x0000000000000ae0                __dynsym_start = .
+.dynsym         0x0000000000000dec        0x0
+                0x0000000000000dec                __dynsym_start = .
  *(.dynsym)
-                0x0000000000000ae0                _end = .
+                0x0000000000000dec                _end = .
 
-.bss            0x0000000000000ae0        0x4
-                0x0000000000000ae0                __bss_start = .
+.bss            0x0000000000000dec        0x8
+                0x0000000000000dec                __bss_start = .
  *(.bss)
- .bss           0x0000000000000ae0        0x4 s3c64xx.o
-                0x0000000000000ae4                . = ALIGN (0x4)
-                0x0000000000000ae4                __bss_end__ = .
+ .bss           0x0000000000000dec        0x8 s3c64xx.o
+                0x0000000000000dec                cur_ecc_mode
+                0x0000000000000df4                . = ALIGN (0x4)
+                0x0000000000000df4                __bss_end__ = .
 Address of section .text set to 0x0
 LOAD start.o
 LOAD cpu_init.o
@@ -338,37 +353,37 @@ OUTPUT(/home/houstar/GitRepo/u-boot/nand_spl/u-boot-spl elf32-littlearm)
  .note.GNU-stack
                 0x0000000000000000        0x0 nand_base.o
 
-.debug_line     0x0000000000000000     0x19c2
+.debug_line     0x0000000000000000     0x1a75
  .debug_line    0x0000000000000000       0x88 start.o
  .debug_line    0x0000000000000088       0x7c cpu_init.o
  .debug_line    0x0000000000000104      0x1fb nand_boot.o
  .debug_line    0x00000000000002ff       0xac lowlevel_init.o
  .debug_line    0x00000000000003ab      0x170 nand_ecc.o
- .debug_line    0x000000000000051b      0x252 s3c64xx.o
- .debug_line    0x000000000000076d      0x106 houstar_nand_spl.o
- .debug_line    0x0000000000000873     0x114f nand_base.o
+ .debug_line    0x000000000000051b      0x305 s3c64xx.o
+ .debug_line    0x0000000000000820      0x106 houstar_nand_spl.o
+ .debug_line    0x0000000000000926     0x114f nand_base.o
 
-.debug_info     0x0000000000000000     0x9b7e
+.debug_info     0x0000000000000000     0xa08c
  .debug_info    0x0000000000000000       0x6c start.o
  .debug_info    0x000000000000006c       0x6f cpu_init.o
  .debug_info    0x00000000000000db     0x18d1 nand_boot.o
  .debug_info    0x00000000000019ac       0x74 lowlevel_init.o
  .debug_info    0x0000000000001a20      0xb3e nand_ecc.o
- .debug_info    0x000000000000255e     0x171f s3c64xx.o
- .debug_info    0x0000000000003c7d      0x49d houstar_nand_spl.o
- .debug_info    0x000000000000411a     0x5a64 nand_base.o
+ .debug_info    0x000000000000255e     0x1c2d s3c64xx.o
+ .debug_info    0x000000000000418b      0x49d houstar_nand_spl.o
+ .debug_info    0x0000000000004628     0x5a64 nand_base.o
 
-.debug_abbrev   0x0000000000000000      0xfc4
+.debug_abbrev   0x0000000000000000     0x1139
  .debug_abbrev  0x0000000000000000       0x14 start.o
  .debug_abbrev  0x0000000000000014       0x14 cpu_init.o
  .debug_abbrev  0x0000000000000028      0x30d nand_boot.o
  .debug_abbrev  0x0000000000000335       0x14 lowlevel_init.o
  .debug_abbrev  0x0000000000000349      0x1df nand_ecc.o
- .debug_abbrev  0x0000000000000528      0x321 s3c64xx.o
- .debug_abbrev  0x0000000000000849      0x142 houstar_nand_spl.o
- .debug_abbrev  0x000000000000098b      0x639 nand_base.o
+ .debug_abbrev  0x0000000000000528      0x496 s3c64xx.o
+ .debug_abbrev  0x00000000000009be      0x142 houstar_nand_spl.o
+ .debug_abbrev  0x0000000000000b00      0x639 nand_base.o
 
-.debug_aranges  0x0000000000000000      0x300
+.debug_aranges  0x0000000000000000      0x310
  .debug_aranges
                 0x0000000000000000       0x20 start.o
  .debug_aranges
@@ -380,41 +395,41 @@ OUTPUT(/home/houstar/GitRepo/u-boot/nand_spl/u-boot-spl elf32-littlearm)
  .debug_aranges
                 0x0000000000000090       0x20 nand_ecc.o
  .debug_aranges
-                0x00000000000000b0       0x50 s3c64xx.o
+                0x00000000000000b0       0x60 s3c64xx.o
  .debug_aranges
-                0x0000000000000100       0x20 houstar_nand_spl.o
+                0x0000000000000110       0x20 houstar_nand_spl.o
  .debug_aranges
-                0x0000000000000120      0x1e0 nand_base.o
+                0x0000000000000130      0x1e0 nand_base.o
 
-.debug_loc      0x0000000000000000     0x4d77
+.debug_loc      0x0000000000000000     0x5175
  .debug_loc     0x0000000000000000      0x3bb nand_boot.o
  .debug_loc     0x00000000000003bb      0x2d0 nand_ecc.o
- .debug_loc     0x000000000000068b      0x47a s3c64xx.o
- .debug_loc     0x0000000000000b05       0x41 houstar_nand_spl.o
- .debug_loc     0x0000000000000b46     0x4231 nand_base.o
+ .debug_loc     0x000000000000068b      0x878 s3c64xx.o
+ .debug_loc     0x0000000000000f03       0x41 houstar_nand_spl.o
+ .debug_loc     0x0000000000000f44     0x4231 nand_base.o
 
-.debug_ranges   0x0000000000000000      0x618
+.debug_ranges   0x0000000000000000      0x640
  .debug_ranges  0x0000000000000000       0x90 nand_boot.o
  .debug_ranges  0x0000000000000090       0x10 nand_ecc.o
- .debug_ranges  0x00000000000000a0       0x58 s3c64xx.o
- .debug_ranges  0x00000000000000f8       0x10 houstar_nand_spl.o
- .debug_ranges  0x0000000000000108      0x510 nand_base.o
+ .debug_ranges  0x00000000000000a0       0x80 s3c64xx.o
+ .debug_ranges  0x0000000000000120       0x10 houstar_nand_spl.o
+ .debug_ranges  0x0000000000000130      0x510 nand_base.o
 
-.debug_str      0x0000000000000000     0x11ce
- .debug_str     0x0000000000000000      0x7a1 nand_boot.o
+.debug_str      0x0000000000000000     0x1287
+ .debug_str     0x0000000000000000      0x79c nand_boot.o
                                         0x97f (size before relaxing)
- .debug_str     0x00000000000007a1       0x37 nand_ecc.o
+ .debug_str     0x000000000000079c       0x49 nand_ecc.o
                                         0x5b4 (size before relaxing)
- .debug_str     0x00000000000007d8      0x101 s3c64xx.o
-                                        0x9d0 (size before relaxing)
- .debug_str     0x00000000000008d9       0xf8 houstar_nand_spl.o
+ .debug_str     0x00000000000007e5      0x1ad s3c64xx.o
+                                        0xa9b (size before relaxing)
+ .debug_str     0x0000000000000992       0xf8 houstar_nand_spl.o
                                         0x30f (size before relaxing)
- .debug_str     0x00000000000009d1      0x7fd nand_base.o
+ .debug_str     0x0000000000000a8a      0x7fd nand_base.o
                                        0x1141 (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x87c
+.debug_frame    0x0000000000000000      0x8d8
  .debug_frame   0x0000000000000000       0x78 nand_boot.o
  .debug_frame   0x0000000000000078       0x30 nand_ecc.o
- .debug_frame   0x00000000000000a8       0x8c s3c64xx.o
- .debug_frame   0x0000000000000134       0x28 houstar_nand_spl.o
- .debug_frame   0x000000000000015c      0x720 nand_base.o
+ .debug_frame   0x00000000000000a8       0xe8 s3c64xx.o
+ .debug_frame   0x0000000000000190       0x28 houstar_nand_spl.o
+ .debug_frame   0x00000000000001b8      0x720 nand_base.o
