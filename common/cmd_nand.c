@@ -802,6 +802,7 @@ U_BOOT_CMD(
 		"nand device [dev] - show or set current device\n"
 		"nand read - addr off|partition size\n"
 		"nand write - addr off|partition size\n"
+		"nand write.uboot - addr off|partition size\n"
 		"    read/write 'size' bytes starting at offset 'off'\n"
 		"    to/from memory address 'addr', skipping bad blocks.\n"
 		"nand read.raw - addr off|partition [count]\n"
